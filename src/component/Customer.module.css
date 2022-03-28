@@ -1,0 +1,22 @@
+.searchBar{
+    list-style:none;
+    text-align: left;
+    padding-left: 0;
+    border: 1px solid black;
+}
+
+.searchBar > li{
+    
+    border: 1px solid black;
+}
+
+.liButton{
+    outline: 0;
+    border: 0;
+    background-color: #fff;
+    width: 100%;
+}
+
+.memberTable{
+    padding-left: -100px;
+}

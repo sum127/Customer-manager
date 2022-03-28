@@ -1,0 +1,8 @@
+.infoList {
+    list-style: none;
+}
+
+.infoList > li > span {
+    display: inline-block;
+    width: 100px;
+}

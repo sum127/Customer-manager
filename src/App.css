@@ -2,10 +2,13 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.menu{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

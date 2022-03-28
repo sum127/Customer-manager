@@ -3,10 +3,39 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {Provider} from 'react-redux';
+import { createStore } from 'redux';
+
+// import CustomerAskData from './CustomerAskData'
+
+let basicState = [
+  
+]
+
+function reducer(state = basicState, ACTION){
+
+  if(ACTION.type === 'findInformation'){
+    if(state.length === 0){
+      let copy = [...state];
+      copy.push(ACTION.PAYLOAD)
+      return copy;
+    }else{
+      let copy = [...state];
+      copy[0] = ACTION.PAYLOAD ;
+      return copy;
+    }
+  }else{
+    return state
+  }
+}
+
+let store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
