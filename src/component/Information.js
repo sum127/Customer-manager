@@ -9,12 +9,16 @@ function Information(props) {
     // true일때 기존정보 false일때 상담이력
     let [informationSwitch, informationSwitchChange] = useState(true);
 
+    // 고객 답변데이터
     let [askList, askListChange] = useState(CustomerAskData);
 
+    // 전체 답변수 
     let [count, countChange] = useState(0);
 
+    // store에 저장된 고객정보
     let [info, infoChange] = useState([]);
 
+    // store에 저장된 고객정보가 변경될때마다 감지
     useEffect(()=>{
         infoChange(props.state);
 
@@ -37,8 +41,9 @@ function Information(props) {
             </Nav>
             </Navbar>
             {
-                informationSwitch === true ? <Infor props={props} info={info}></Infor> : 
-                <Counsel props={props} askList={askList} askListChange={askListChange} count={count} countChange={countChange}></Counsel>
+                informationSwitch === true 
+                ? <Infor props={props} info={info}></Infor> 
+                : <Counsel props={props} askList={askList} askListChange={askListChange} count={count} countChange={countChange}></Counsel>
             }
         </>
         
@@ -50,8 +55,9 @@ function Infor(props){
     return(
         <>
             {
-                props.info.length > 0 ? 
-                <ul className={styles.infoList}>
+                // store에 고객정보가 있는지없는지 체크(조회여부)
+                props.info.length > 0 
+                ? <ul className={styles.infoList}>
                     <li><span>고객ID</span><input type="text" value={props.info[0].id}/></li>
                     <li><span>차량번호</span><input type="text" value={props.info[0].car_num}/></li>
                     <li><span>소유자</span><input type="text" value={props.info[0].owner}/></li>
@@ -60,7 +66,8 @@ function Infor(props){
                     <li><span>제조사</span><input type="text" value={props.info[0].vender}/></li>
                     <li><span>차량명</span><input type="text" value={props.info[0].car_name}/></li>
                     <li><span>세부모델</span><input type="text" value={props.info[0].car_detail_model}/></li>
-                </ul> : null
+                </ul> 
+                : null
             }
         </>
     )
@@ -68,14 +75,17 @@ function Infor(props){
 
 function Counsel(props){
     
+    // 정보 수정 스위치
     let [modify, modifyChange] = useState(false);
 
+    // 정보 입력 스위치
     let [insertSwitch, insertSwitchChange] = useState(false);
 
+    // 목록에서 수정하기위해 선택한 정보
     let [ask, askChange] = useState({});
 
     
-    
+    // 정보 저장하는 함수
     function insertCounsel(){
         
         var id = 0;
@@ -118,6 +128,7 @@ function Counsel(props){
         insertSwitchChange(false)
     }
     
+    // 수정창 on/off 및, 선택한 데이터를 ask 스테이트에 저장
     const modifySwitchFn = function(no){
         modifyChange(true);
         
@@ -140,6 +151,7 @@ function Counsel(props){
         askChange(data);
     }
 
+    // 정보 수정하는 함수
     const modifyCounsel = function(){
         let id = ask.id;
         let ask_date = ask.ask_date;
@@ -168,8 +180,10 @@ function Counsel(props){
         
         <>
             {
-                insertSwitch === true ?
-                <Modal.Dialog>
+                // 데이터 저장하는 화면
+
+                insertSwitch === true 
+                ? <Modal.Dialog>
                     <Modal.Header>
                         <Modal.Title>상담 추가</Modal.Title>
                     </Modal.Header>
@@ -190,8 +204,10 @@ function Counsel(props){
             }
 
             {
-                modify === true ?
-                <Modal.Dialog>
+                // 데이터 수정하는 화면
+
+                modify === true 
+                ? <Modal.Dialog>
                     <Modal.Header>
                         <Modal.Title>상담 수정</Modal.Title>
                     </Modal.Header>
@@ -212,8 +228,9 @@ function Counsel(props){
             }
             
             {
-                insertSwitch === false && modify === false ?
-                <>
+                // 정보를 등록하거나 수정하기전 목록을 보여주는 화면
+                insertSwitch === false && modify === false 
+                ? <>
                     <h4>상담이력</h4>
                     <span>전체 {props.count}</span>
                     <Button style={{marginLeft:"20px"}} onClick={()=>{insertSwitchChange(true)}}>상담 추가</Button>

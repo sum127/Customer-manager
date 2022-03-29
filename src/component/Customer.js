@@ -25,7 +25,9 @@ function Customer(props) {
             </Nav>
             </Navbar>
             {
-                customerSwitch === true ? <SearchBar customerList={customerList} props={props}></SearchBar> : <MemberList className={styles.memberTable} customerList={customerList}></MemberList>
+                customerSwitch === true 
+                ? <SearchBar customerList={customerList} props={props}></SearchBar> 
+                : <MemberList className={styles.memberTable} customerList={customerList}></MemberList>
             }
         </>
         </div>
@@ -34,7 +36,10 @@ function Customer(props) {
 
 function SearchBar(props){
 
+    //연관검색어 스위치
     let [searchSwitch, searchSwitchChange] = useState(false);
+
+    // input value값
     let [value, valueChange] = useState("");
 
 
@@ -46,6 +51,7 @@ function SearchBar(props){
         }
     },[value])
 
+    // input값의 넘버와 하나라도 일치하는 번호 목록구성
     const list = props.customerList.map((a, i)=>{
 
         if(a.phone.indexOf(value) > -1){
@@ -67,6 +73,7 @@ function SearchBar(props){
             
     })
 
+    // 번호를 선택하여 조회를 클릭시 store에 저장
     const findInfomation = function(){
         props.customerList.map((a, i)=>{
             if(a.phone === document.getElementById("text").value){
@@ -81,10 +88,8 @@ function SearchBar(props){
             <input id="text" type="text" placeholder="전화번호를 입력해주세요" size="30" onChange={(e)=>{valueChange(e.target.value)}}/>
             <Button onClick={findInfomation}>조회</Button>
             {
-                searchSwitch === true ?
-                
-                <ul ul className={styles.searchBar}>{list}</ul>
-
+                searchSwitch === true 
+                ? <ul ul className={styles.searchBar}>{list}</ul>
                 : null
             }
             
